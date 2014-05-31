@@ -1,5 +1,5 @@
 #!/bin/bash
-g++ myflipcoin.cpp -o p 
+g++ submin.cpp -o p 
 if [  "$?" = "0" ] ; then
 	./p < input.txt > output.txt	
 fi
