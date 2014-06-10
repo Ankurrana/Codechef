@@ -1,5 +1,5 @@
 #!/bin/bash
-g++ digsum.cpp -o p 
+g++ passwd.cpp -o p 
 if [  "$?" = "0" ] ; then
 	./p < input.txt > output.txt	
 fi

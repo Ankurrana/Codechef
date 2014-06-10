@@ -66,7 +66,7 @@ int main(){
 		while(b){c = a%b; a = b; b = c;}
 
 		printf("%lld/%lld\n",num/a,den/a);
-		
+
 
 	}
  
@@ -75,3 +75,4 @@ int main(){
 	return 0;
 } 
 
+ 	

@@ -31,26 +31,16 @@ using namespace std;
 int main(){
 	lld i,z,n,j,k,t,h,ans = 0;
 	lld a,b,c,d;
+	
 	string str;
 	cin >> str;
-	n = str.length();
+	lld length = str.length();
 	lld num[100010];
-	lld dis[100010] = {999999};  //this will maintain the distance to reach a particular index;
-	bool isupdated[100010] = {0};
 
-	iterate(n){
-		num[i] = str[i]-'0';
+	iterate(length){
+		num[i] = (int)(str[i] - '0');
 	}
-
-	iterate(n){
-		int k = num[i];
-		int distance = dis[i];
-
-		if( !isupdated[i] )
-			iterate(n){
-
-			}
-	}
+		
 	
 
 	
