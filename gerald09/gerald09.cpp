@@ -40,19 +40,18 @@ int main(){
 			a = 1;
 		}else if(k <= n*m*n && k<=n*m*m){
 			a = 1;
-		}else if(k <= 2.4*n*m*n || k<=2.4*n*m*m){
+		}else if(k <= 2.455*n*m*n || k<=2.455*n*m*m){
 			a = 2;
 		}
-		else if(k <= 0.3*(n*m*n*m)) 
+		else if(k <= 0.355*(n*m*n*m)) 
 			a = 3;
 		else if(k <= n*m*n*m ){
 			a = 4;
-		}else{
-			a = 2;
 		}
 
 		Diterate(i,1,n){
 			Diterate(j,1,m){
+				if(i&1) rand();
 				printf("%c",gen[rand()%a]);
 				
 			}

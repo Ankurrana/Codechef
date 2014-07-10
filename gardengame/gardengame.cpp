@@ -148,16 +148,6 @@ lld lcm(vector< int > v){
 
 int main(){
 	
-	// Primer pr(10001);
-	// pr.genPrimesBetween(1,10000,primes);
-	// factorise(36);
-	// factorise(8);
-
-	// for(int i=0;i<10;i++){
-	// 	printf("primes[%d] = %lld raised to the power %d\n",i,primes[i],exponent[i]);		
-	// }
-
-
 	lld i,j,t,n;
 	lld p,q,k,z,l;
 	vector < int  > myv;
