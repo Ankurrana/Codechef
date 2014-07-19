@@ -30,19 +30,20 @@ struct Edge{
 	lld weight;
 }CEdges[20010],OEdges[20010];
 
-int findParent(int i){  //it accpets a node and returns its representative node
-	if( i == parent[i]) return parent[i];
-	else{
-		parent[i] = findParent(parent[i]); /*  Path Compression */
-		return parent[i];
-	}
+inline int findParent(int i){ 
+	return (i==parent[i])?i:parent[i] = findParent(parent[i]);
 };
 
-int  myfunc(const void *a ,const void *b){
-	int x = ((const struct Edge*)a)->weight;
-	int y = ((const struct Edge*)b)->weight;
+int unite(int u, int v){
+	parent[findParent(u)] = findParent(v);
+}
 
-	return x>y;
+int isSameSet(int u,int v){
+	return (findParent(u) == findParent(v));
+}
+
+bool myfunc(struct Edge a, struct Edge b){
+	return a.weight < b.weight;
 }
 
 
@@ -75,43 +76,42 @@ lld solve(){
 		CEdges[i].weight = k;	
 	}
 
-	qsort(OEdges,m1,sizeof(*OEdges),myfunc);
-	qsort(CEdges,m2,sizeof(*CEdges),myfunc);
+	// qsort(OEdges,m1,sizeof(*OEdges),myfunc);
+	// qsort(CEdges,m2,sizeof(*CEdges),myfunc);
 
-	int egdesadded = 0;
+	sort(OEdges,OEdges+m1,myfunc);
+	sort(CEdges,CEdges+m2,myfunc);
+
+
+	int EdgesRequired = n-1;
 	lld cost = 0;
 	lld totalCost = 0;
 	i = 0;
-	while(egdesadded <= n-1 && i<m2){
-		// cout << CEdges[i].u << " " << CEdges[i].v << " " << findParent(CEdges[i].u) << " "  << findParent(CEdges[i].v) << "\n"; 
-
-		if( findParent(CEdges[i].u) != findParent(CEdges[i].v) ){
-			egdesadded++;
-			parent [ parent[ CEdges[i].u ] ]= parent[ CEdges[i].v];
+	while(EdgesRequired && i<m2){
+		if( !isSameSet(CEdges[i].v , CEdges[i].u)){
+			unite(CEdges[i].v , CEdges[i].u);
+			EdgesRequired--;
 			cost += CEdges[i].weight;
-			totalCost += CEdges[i].weight;
-
 		}
 		i++;
 	}
+
 
 	i = 0;
 
-	while(egdesadded <= n-1 && i<m1){
-		if( findParent(OEdges[i].u) != findParent(OEdges[i].v) ){
-			egdesadded++;
-			parent[ parent[ OEdges[i].u ] ]  = parent[ OEdges[i].v];
+	while(EdgesRequired && i<m1){
+		if( !isSameSet(OEdges[i].u , OEdges[i].v ) ){
+			EdgesRequired--;
 			totalCost += OEdges[i].weight;
-
 		}
 		i++;
 	}
 
 
-	if(egdesadded != n-1)
+	if(EdgesRequired)
 		printf("Impossible\n");
 	else{
-		printf("%lld %lld\n",cost,totalCost);
+		printf("%lld %lld\n",cost,cost + totalCost);
 	}
 
 }
@@ -127,3 +127,5 @@ int main(){
 	}
 	return 0;
 }
+
+
