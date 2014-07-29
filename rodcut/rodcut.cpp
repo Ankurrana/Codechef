@@ -1,12 +1,14 @@
 #include "bits/stdc++.h"
-
+#include "string"
 using namespace std;
 
+typedef long long int lld;
+
+
 #define iterate(n) for(i=0;i<n;i++)
-#define Diterate(i,s,e) for(lld (i) = s ; (i)<=d ; i++)
+#define Diterate(i,s,e) for(lld (i) = s ; (i)<=e ; i++)
 #define getw getchar_unlocked
 #define get(a) geta(&a)
-typedef long long int
 #define p(a) printf("%lld\n",(lld)(a))
 #define d(str,a) cout << str << " = " << a << endl
 #define dv(str,a,n) iterate(n) { cout << str << "[" << i << "] = " << a[i] << endl; }
@@ -22,36 +24,34 @@ inline void geta(T *a){
 	*a = n*s;
 }
 
+int c[10];
+int dp[10][10];
+int solve(int i,int j){
+	if(dp[i][j]!=-1) return dp[i][j];
+	if(i==j) return 0;
+	if(j == i+1) return 0;
+	int mini = 1e8;
+	for(int k=i+1;k<j;k++){
+		mini  = min(mini , solve(i,k)+solve(k,j) + c[k] - c[i] + c[j] - c[k]);
+	}
+	return dp[i][j] = mini;
 
+}
 
 
 int main(){
 	lld i,j,t,n;
 	lld p,q,k,z,l;
-	lld m;
-	lld min,max;
-	get(n);
-	get(m);
+	ios_base::sync_with_stdio(false);
 
-	min = n+2;
-	max = 3 * n;
+	memset(dp,-1,sizeof(dp));
 
-	lld mid = (max + min)/2;
-	iterate(m){
-		get(q);
-		if(q<min){
-			p(0);                                                                                                                                                               
-		}else{
-			if(q<=mid){
-				p(q-min+1);
-			}else{
-				p(max-q+1);
-			}
-		}
-	}
+	c[0] = 0;
+	c[1] = 25;
+	c[2] = 50;
+	c[3] = 100;
 
-
-
+	p(solve(0,3));
 	return 0;
 }
 

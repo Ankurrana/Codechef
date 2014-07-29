@@ -1,12 +1,14 @@
 #include "bits/stdc++.h"
-
+#include "string"
 using namespace std;
 
+typedef long long int lld;
+
+
 #define iterate(n) for(i=0;i<n;i++)
-#define Diterate(i,s,e) for(lld (i) = s ; (i)<=d ; i++)
+#define Diterate(i,s,e) for(lld (i) = s ; (i)<=e ; i++)
 #define getw getchar_unlocked
 #define get(a) geta(&a)
-typedef long long int
 #define p(a) printf("%lld\n",(lld)(a))
 #define d(str,a) cout << str << " = " << a << endl
 #define dv(str,a,n) iterate(n) { cout << str << "[" << i << "] = " << a[i] << endl; }
@@ -23,31 +25,27 @@ inline void geta(T *a){
 }
 
 
+int a[100];
+int dp[100]; // the axximum cost of cutting a rod of legnth 
 
 
 int main(){
 	lld i,j,t,n;
 	lld p,q,k,z,l;
-	lld m;
-	lld min,max;
+	ios_base::sync_with_stdio(false);
 	get(n);
-	get(m);
-
-	min = n+2;
-	max = 3 * n;
-
-	lld mid = (max + min)/2;
-	iterate(m){
-		get(q);
-		if(q<min){
-			p(0);                                                                                                                                                               
-		}else{
-			if(q<=mid){
-				p(q-min+1);
-			}else{
-				p(max-q+1);
-			}
+	Diterate(i,1,n){
+		get(a[i]);
+	}
+	dp[1] = a[1] ; //Bcoz it cannot be cut.
+	dp[0] = 0;
+	for( k = 2; k <= n;k++){
+		int maxi = -1000;
+		for(p = 1; p<=(k - k/2);p++){
+			 maxi =  max(maxi, max(a[k],dp[p] + dp[k-p]));
 		}
+		dp[k] = maxi;
+		printf("dp[%d] = %d\n",(int)k,dp[k]);
 	}
 
 

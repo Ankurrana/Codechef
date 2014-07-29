@@ -11,7 +11,7 @@ using namespace std;
 #define d(str,a) cout << str << " = " << a << endl
 #define dv(str,a,n) Diterate(i,0,n-1) { cout << str << "[" << i << "] = " << a[i] << endl; }
 
-#define MOD 1000000007
+// #define MOD 1000000007
 
 template < typename T >
 inline void geta(T *a){
@@ -30,118 +30,70 @@ struct Node{
 
 int shifts[100010];
 
-lld power(lld a , lld b,lld mod){
-	long long ans = 1;
-	while(b){ 
-		if( b&1 ) ans = (ans * a);
-		if(ans > mod) ans %= mod;
-		a = (a * a);
-		if(a > mod) a %= mod;
-		b = b>>1;
+class LCM{
+public:
+	int primesList[80001];
+	long long MOD;
+	int pcount;
+	LCM(int maximum = 1000001){
+		pcount  = sieve(maximum);
+		MOD = 1000000007;
 	}
-	return ans;
-}
 
-class Primer{
-private:
-	lld primesList[80000] ; //Max upto 10^6
-	bool primesBitset[1000001]; // A bitset of primes initially all are primes 
-	lld primesCanBeGeneratedUpto;
-	lld primesCount;
-	void sieve(lld n){  
-	 	lld i, j;
+	long long findlcm(vector< int > V){
+		int i;
+		vector< int >:: iterator it;
+		int exponent[80001] = {0};
+
+		for( it=V.begin(); it!=V.end(); it++  ){
+			int curr = *it;
+			for(i=0;i<pcount && primesList[i]<=curr ;i++){
+				int e = 0;
+				while(curr > 1 && curr%primesList[i] == 0 ){ e++; curr /= primesList[i]; }
+				exponent[i] = max(e,exponent[i] );
+			}
+
+		}
+		long long ans  = 1;
+		for(i=0;i<pcount;i++){
+			ans = (ans * power(primesList[i],exponent[i]));
+			if(ans > MOD) ans %= MOD;
+		}
+
+		return ans;
+	}
+
+
+public:
+	long long power(long long a , long long  b){
+		long long ans = 1;
+		while(b){ 
+			if( b&1 ) ans = (ans * a);
+			if(ans > MOD) ans %= MOD;
+			a = (a * a);
+			if(a > MOD) a %= MOD;
+			b = b >> 1;
+		}
+		return ans;
+	}
+	int sieve(lld n){  
+	 	lld i, j,count;
+	 	bitset<1000001> primesBitset;
+	 	count = 0;
 		primesBitset[1] = 1; // 1 is not a prime
 		for(i=2; i<=n; i++){
 			if(primesBitset[i] == 0){
 				for(j=i; (i*j)<=n; j++)
 					primesBitset[(i*j)] = 1;
-				primesList[primesCount++] = i;
+				primesList[count++] = i;
 			}
 		}
-	}
-public:
-	void genPrimesBetween(lld lower , lld higher,lld *resultPrimes){
-		if(lower == 1) lower++;
-		lld diff = higher - lower + 1;
-		bool Bitset[1000001] = {0};
- 
-		lld sqrthigher = ceil(sqrt(higher));
- 
-		for(lld i=0;primesList[i] < sqrthigher ;i++){
-			lld k = ceil((double)lower/primesList[i]);
-			lld maxi = higher/primesList[i];
-			if( k == 1 ) k++;
-			while(k <= maxi){
-				Bitset[k*primesList[i] - lower] = 1;
-				k++;
-			}
-		}
-		lld count = 0;
-		for(lld i=0;i<higher-lower+1;i++){
-			if(Bitset[i]==0)
-				resultPrimes[count++] = i + lower;
-		}
-		resultPrimes[count++] = -1;
- 
-	}
-	Primer(lld n = 10){
-		primesCount = 0;
-		n = min(n+1,(lld)1e12+1);   
-		primesCanBeGeneratedUpto = n;
-		sieve(ceil(sqrt(n)));  //Include "cmath"
- 
-	}
-	void printprimes(){
-		lld i  = 0;
-		for(i=0;i<primesCount;i++){
-			cout << primesList[i] << " ";
-		}
+
+		return count;
+
 	}
 	
 };
-
-lld primes[1300];
-int exponent[1300];
-
-void factorise(lld a){
-	lld k = a;
-	for(int i=0;k>1;i++){
-		int count =  0;
-		while(k%primes[i] == 0){
-			count++;
-			k = k/primes[i];
-		}
-		exponent[i] = max(count,exponent[i]);
-	}
-
-
-}
-
-
-lld lcm(vector< int > v){
-	int i;
-	for(i=0;i<1250;i++){ 
-		exponent[i] = 0;
-	}
-
-	vector< int >::iterator it;
-	for(it = v.begin() ; it!=v.end() ; it++){
-		factorise(*it);
-	}
-
-
-	// for(int i=0;i<20;i++){
-	// 	printf("primes[%d] = %lld raised to the power %d\n",i,primes[i],exponent[i]);		
-	// }
-
-	lld ans = 1;
-
-	for(i=0;i<=1230;i++){
-		ans = ans * power(primes[i],exponent[i],MOD)%MOD;
-	}
-	return ans%MOD;
-
-}
 
 
 
@@ -155,8 +107,8 @@ int main(){
 	int count , root , next;
 	get(t);
 	
-	Primer pr(10001);
-	pr.genPrimesBetween(1,10000,primes);
+	// Primer pr(10001);
+	// pr.genPrimesBetween(1,10000,primes);
 
 	while(t--){
 		get(n);
@@ -184,10 +136,10 @@ int main(){
 
 		}
 
-
+		LCM lcm = LCM(10001);
 		/* All i need is to find the lcm of all the elements of the vector myv %MOD (but how??)  */ 
 
-		p(lcm(myv));
+		p( lcm.findlcm(myv) );
 
 
 	}

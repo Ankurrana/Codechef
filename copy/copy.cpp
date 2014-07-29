@@ -22,31 +22,96 @@ inline void geta(T *a){
 	*a = n*s;
 }
 
-lld solve(){
-	bool a[100010] = {0};
-	lld n,k,count = 0;
-	get(n);
-	lld i;
-	iterate(n){
-		get(k);
-		
-		if(!a[k]) {
-			a[k]++;
-			count++;
+
+
+class LCM{
+public:
+	int primesList[80001];
+	long long MOD;
+	int pcount;
+	LCM(int maximum = 1000001){
+		pcount  = sieve(maximum);
+		MOD = 1000000007;
+	}
+
+	long long findlcm(vector< int > V){
+		int i;
+		vector< int >:: iterator it;
+		int exponent[80001] = {0};
+
+		for( it=V.begin(); it!=V.end(); it++  ){
+			int curr = *it;
+			for(i=0;i<pcount && primesList[i]<=curr ;i++){
+				int e = 0;
+				while(curr > 1 && curr%primesList[i] == 0 ){ e++; curr /= primesList[i]; }
+				exponent[i] = max(e,exponent[i] );
+			}
+
+		}
+		long long ans  = 1;
+		for(i=0;i<pcount;i++){
+			ans = (ans * power(primesList[i],exponent[i]));
+			if(ans > MOD) ans %= MOD;
 		}
 
+		return ans;
 	}
-	return count;
-}
+
+
+public:
+	long long power(long long a , long long  b){
+		long long ans = 1;
+		while(b){ 
+			if( b&1 ) ans = (ans * a);
+			if(ans > MOD) ans %= MOD;
+			a = (a * a);
+			if(a > MOD) a %= MOD;
+			b = b >> 1;
+		}
+		return ans;
+	}
+	int sieve(lld n){  
+	 	lld i, j,count;
+		bool primesBitset[1000001]; // 1 is not a prime
+	 	
+	 	count = 0;
+		primesBitset[1] = 1; // 1 is not a prime
+		for(i=2; i<=n; i++){
+			if(primesBitset[i] == 0){
+				for(j=i; (i*j)<=n; j++)
+					primesBitset[(i*j)] = 1;
+				primesList[count++] = i;
+			}
+		}
+
+		return count;
+
+	}
+	
+};
+
+ 	/* @n : The number upto which primes are to be generated */
+	 	/* @primeList  :  Pointer to a int array where the result is to be stored*/
+	 	/* returns the number of primes from 2 to n */
+	 	/* You can also obtain the bitset (for O(1) checking ) by makinbg neccessary changes  */
 
 int main(){
 	lld i,j,t,n;
 	lld p,q,k,z,l;
-	get(t);
+	vector < int > V;
+	
 
-	while(t--){
-		p(solve());
-	}
+	V.push_back(12);
+	V.push_back(14);
+	V.push_back(6); 
+	
+	LCM lcm = LCM(14);
+
+	// cout << lcm.power(2,10);
+
+	p(lcm.findlcm(V));
+
+	
 	return 0;
 }
 

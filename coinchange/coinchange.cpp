@@ -1,12 +1,14 @@
 #include "bits/stdc++.h"
-
+#include "string"
 using namespace std;
 
+typedef long long int lld
+
+
 #define iterate(n) for(i=0;i<n;i++)
-#define Diterate(i,s,e) for(lld (i) = s ; (i)<=d ; i++)
+#define Diterate(i,s,e) for(lld (i) = s ; (i)<=e ; i++)
 #define getw getchar_unlocked
 #define get(a) geta(&a)
-typedef long long int
 #define p(a) printf("%lld\n",(lld)(a))
 #define d(str,a) cout << str << " = " << a << endl
 #define dv(str,a,n) iterate(n) { cout << str << "[" << i << "] = " << a[i] << endl; }
@@ -22,36 +24,27 @@ inline void geta(T *a){
 	*a = n*s;
 }
 
-
-
-
 int main(){
 	lld i,j,t,n;
 	lld p,q,k,z,l;
-	lld m;
-	lld min,max;
+	ios_base::sync_with_stdio(false);
+	int dp[200][20] = {0};
+	int coins[20];
 	get(n);
-	get(m);
 
-	min = n+2;
-	max = 3 * n;
+	iterate(n)
+		get(coins[i]);
 
-	lld mid = (max + min)/2;
-	iterate(m){
-		get(q);
-		if(q<min){
-			p(0);                                                                                                                                                               
-		}else{
-			if(q<=mid){
-				p(q-min+1);
-			}else{
-				p(max-q+1);
-			}
+
+	get(sum);
+
+	for(i=1;i<=sum;i++){
+		for(j=0;j<n;j++){
+			if()
 		}
 	}
 
-
-
+	
 	return 0;
 }
 
