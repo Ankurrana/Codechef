@@ -1,0 +1,6 @@
+sum = 1  index = 1
+sum = 1  index = 0
+sum = 1  index = -1
+third
+third
+1

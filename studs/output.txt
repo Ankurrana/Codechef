@@ -1,0 +1,14 @@
+rank of 1 = 2
+rank of 2 = 3
+rank of 3 = 1
+rank of 4 = 4
+rank of 5 = 6
+rank of 6 = 8
+rank of 7 = 10
+rank of 8 = 9
+rank of 9 = 5
+rank of 10 = 7
+10
+4
+6
+5
