@@ -168,7 +168,10 @@ int main(){
 		get(k);
 		List.Insert(k);
 	}
-
+Won an online Algorithmic Event "Algothematics" in Annual Techno-cultural Contest of JSS, Noida.
+Won Onsite Linus shell scripting Contest "Crack the Shell" in Annual Technical Contest of JSS, Noida.
+Secured Top Most rank of 270 in Codechef Monthly Short Programming Contest (COOK48 ) in July '14.
+Secured Top most Rank of 213 in Codechef Long Contest MAY CHALLENGE 2014.
 	List.showAll();
 
 	/* Insertion Sort */
