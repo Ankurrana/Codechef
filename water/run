@@ -6,3 +6,14 @@ fi
 cat output.txt
 echo  
 
+#!/bin/bash
+g++ water.cpp -o p 
+if [  "$?" = "0" ] ; then
+	./p < input.txt > output.txt	
+	cat output.txt
+fi
+
+
+
+echo  
+

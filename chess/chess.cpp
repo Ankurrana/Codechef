@@ -1,56 +1,48 @@
 #include "bits/stdc++.h"
-#include "string"
 using namespace std;
 
+typedef vector<int> vi; 
+typedef vector<vi> vvi; 
+typedef pair<int,int> ii;
+typedef long long int lli;
 
-#define iterate(n) for(i=0;i<n;i++)
-#define Diterate(i,s,e) for(int (i) = s ; (i)<=e ; i++)
-#define get(a) cin >> a;
-#define p(a) cout << a;
-#define d(str,a) cout << str << " = " << a << endl
-#define dv(str,a,n) iterate(n) { cout << str << "[" << i << "] = " << a[i] << endl; }
-
-bool exists(int n,int m, int i,int j){
-	if(i<0 || j<0) return false;
-	if(i>=n || j>=m ) return false;
-	return true; 
-}
-
-int main(){
-	ios_base::sync_with_stdio(false);
-	int i,j,t;
-	int p,q,k,z,l;
-	char board[110][111];
-	int m,n;
-	get(n);
-	get(m);
-
-	iterate(n){
-		cin >> board[i];
-	}
+lli max[2001][2001];
+lli b[2001][2001];
 
 
-	for(i=0;i<n;i++){
-		for(j=0;j<m;j++){
-			if(board[i][j] == '.'){
-				if(!(i&1) && !(j&1)) board[i][j] = 'B';
-				if((i&1) && (j&1)) board[i][j] = 'B'; 
-				if(!(i&1) && (j&1)) board[i][j] = 'W'; 
-				if((i&1) && !(j&1)) board[i][j] = 'W'; 
-			}
-		}
-	}	
+#define get(a) cin >> a 
+#define sz(a) int((a).size()) 
+#define pb push_back 
+#define all(c) (c).begin(),(c).end() 
+#define tr(c,it) for(typeof((c).begin()) it = c.begin();it!= (c).end();it++)
+#define present(c,x) ((c).find(x) != (c).end()) 
+#define cpresent(c,x) (find(all(c),x) != (c).end()) 
+#define show(a) tr(a,i){ cout << *i << endl; }
+#define rep(n,i) for(i=0;i<n;i++)
 
 
-	for(i=0;i<n;i++){
-		for(j=0;j<m;j++){
-			cout << board[i][j] ;
-		}
-		cout << "\n";
-	}
 
-	return 0;
-}
+ int main(){
+ 	lli n,i,j,k,l,p,q,x,y;
+ 	get(n);
+
+ 	rep(n,i){
+ 		rep(n,j){
+ 			cin >> b[i][j];
+ 		}
+ 	}
+
+	rep(n,i){
+ 		rep(n,j){
+ 			
+ 		}
+ 	} 	
+
+
+
+
+	return 0; 	
+ }
 
 
 
