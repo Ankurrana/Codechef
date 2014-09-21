@@ -5,7 +5,7 @@ typedef vector<int> vi;
 typedef vector<vi> vvi; 
 typedef pair<int,int> ii;
 typedef long long int lli;
-	    
+
 #define get(a) cin >> a 
 #define sz(a) int((a).size()) 
 #define pb push_back 
@@ -18,17 +18,32 @@ typedef long long int lli;
 
  int main(){
  	lli i,j,k,l,p,q,x,y;
- 	string a,b;
- 	lli t;
- 	get(t);
- 	while(t--){
- 		cin >> a >> b;
- 		if(a.find(b) != (std::string::npos)) {
-    		std::cout << "YES\n"
-		}else{
-			cout << "NO\n";
-		}
- 	}
+ 	lli n,a,b;
+
+ 	get(n);
+ 	get(a);
+ 	get(b);
+
+ 	lli area1;
+ 	lli area2;
+
+ 	lli a1,b1;
+ 	a1 = max(a,n);
+ 	b1 = max(b,6);
+
+ 	area1 = a1*b1;
+
+
+ 	lli a2 = max(a,2*n);
+ 	lli b2 = max(b,3*n);
+
+ 	area2 = a2 * b2;
+
+
+ 	cout << min(area1,area2);
+
+
+
 
 	return 0; 	
  }

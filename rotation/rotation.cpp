@@ -10,7 +10,7 @@ typedef long long int lld;
 #define sz(a) int((a).size()) 
 #define pb push_back 
 #define all(c) (c).begin(),(c).end() 
-#define tr(c,it) for(typeof((c).begin()) it = c.begin();it!= (c).end();it++)
+#define tr(c,it) for(typeof((c).begin()) i = c.begin();i!= (c).end();i++)
 #define present(c,x) ((c).find(x) != (c).end()) 
 #define cpresent(c,x) (find(all(c),x) != (c).end()) 
 #define show(a) tr(a,i){ cout << *i << endl; }
@@ -28,37 +28,40 @@ inline void geta(T *a){
 	*a = n*s;
 }
 
-lld solve(){
-	lld ans = 1;
-	string str;
-	cin >> str;
-
-	bool flag = true;
-	tr(str,it){
-		if(flag){
-			if(*it == 'l') ans <<= 1;
-			else ans = (ans << 1) + 2;
-		}else{
-			if( *it == 'l' ) ans = (ans<<1) - 1;
-			else ans = (ans << 1) + 1;
-		}
-
-		if( ans  >= 1000000007) ans %= 1000000007;
-		flag ^= 1;
-	}	
-	return ans;
-}
-
  int main(){
-	lld i,j,k,l;
-	vi a;
+	lld i,j,k,l,n,q;
 	lld t;
+	vi a;
+	get(n);
+	get(q);
+	a.resize(n);
 
-	// cout << solve();
-	get(t);
-	while(t--){
-		cout << solve() << endl;
+	int start = 0;
+
+	rep(n,i){
+		get(a[i]);
+	}
+
+	char ch;
+	rep(q,i){
+		scanf("%c",&ch);
+		get(k);
+		if( ch == 'R'){
+			k--;
+			printf("%d\n",a[(start+k)%n]);
+		}else if( ch == 'A'){
+			start = (start + (n-k))%n;
+		}else{
+			start = (start - (n-k) );
+			if( start < 0) 
+				start += n;
+		}
+		// rep(n,j){ 
+		// 	cout << a[ (start + j)%n] << "   " ;			
+		// }
+		// cout << endl;
 	}	
+
 	return 0; 	
  }
 

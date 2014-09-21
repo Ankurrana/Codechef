@@ -5,7 +5,7 @@ typedef vector<int> vi;
 typedef vector<vi> vvi; 
 typedef pair<int,int> ii;
 typedef long long int lli;
-	    
+
 #define get(a) cin >> a 
 #define sz(a) int((a).size()) 
 #define pb push_back 
@@ -18,17 +18,33 @@ typedef long long int lli;
 
  int main(){
  	lli i,j,k,l,p,q,x,y;
- 	string a,b;
- 	lli t;
- 	get(t);
- 	while(t--){
- 		cin >> a >> b;
- 		if(a.find(b) != (std::string::npos)) {
-    		std::cout << "YES\n"
-		}else{
-			cout << "NO\n";
-		}
+ 	lli a,b,n,m;
+
+ 	get(n);
+ 	get(m);	
+ 	get(a);	
+ 	get(b); //cost of m rides	
+
+ 	lli ans = 0;
+ 
+ 	double perride = (double)b/m;
+
+ 	if( perride > a ){
+ 		ans  = n * a;
+ 	}else{
+ 		ans = (n/m) * b;
+ 		if( b < (n%m) * a ){
+ 			ans += b;
+ 		}else{
+ 			ans +=(n%m) * a;
+ 		}
+
+
  	}
+
+
+ 	cout << ans;
+
 
 	return 0; 	
  }

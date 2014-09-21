@@ -4,13 +4,13 @@ using namespace std;
 typedef vector<int> vi; 
 typedef vector<vi> vvi; 
 typedef pair<int,int> ii;
-typedef long long int lld;
+typedef unsigned long long int lld;
 #define getw getchar_unlocked
 #define get(a) geta(&a)
 #define sz(a) int((a).size()) 
 #define pb push_back 
 #define all(c) (c).begin(),(c).end() 
-#define tr(c,it) for(typeof((c).begin()) it = c.begin();it!= (c).end();it++)
+#define tr(c,it) for(typeof((c).begin()) i = c.begin();i!= (c).end();i++)
 #define present(c,x) ((c).find(x) != (c).end()) 
 #define cpresent(c,x) (find(all(c),x) != (c).end()) 
 #define show(a) tr(a,i){ cout << *i << endl; }
@@ -28,36 +28,33 @@ inline void geta(T *a){
 	*a = n*s;
 }
 
-lld solve(){
-	lld ans = 1;
-	string str;
-	cin >> str;
 
-	bool flag = true;
-	tr(str,it){
-		if(flag){
-			if(*it == 'l') ans <<= 1;
-			else ans = (ans << 1) + 2;
-		}else{
-			if( *it == 'l' ) ans = (ans<<1) - 1;
-			else ans = (ans << 1) + 1;
-		}
+unsigned long long ncr(int n,int r){
+	if(r > n ) return 0;
+	if( r*2 > n ) r = n-r;
+	if( r == 0 ) return 1;
 
-		if( ans  >= 1000000007) ans %= 1000000007;
-		flag ^= 1;
-	}	
+	unsigned long long ans = n;
+
+	for(int i = 2;i <= r ; i++){
+		ans *= (n-i+1);
+		ans/= i;
+	}
+
 	return ans;
 }
 
+
  int main(){
 	lld i,j,k,l;
-	vi a;
 	lld t;
-
-	// cout << solve();
 	get(t);
 	while(t--){
-		cout << solve() << endl;
+		get(k);
+		get(l);
+		// printf("%lld\n",ncr(k-1,l-1) );
+
+		cout << ncr(k-1,l-1) << endl;
 	}	
 	return 0; 	
  }

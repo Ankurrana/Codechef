@@ -10,7 +10,7 @@ typedef long long int lld;
 #define sz(a) int((a).size()) 
 #define pb push_back 
 #define all(c) (c).begin(),(c).end() 
-#define tr(c,it) for(typeof((c).begin()) it = c.begin();it!= (c).end();it++)
+#define tr(c,it) for(typeof((c).begin()) i = c.begin();i!= (c).end();i++)
 #define present(c,x) ((c).find(x) != (c).end()) 
 #define cpresent(c,x) (find(all(c),x) != (c).end()) 
 #define show(a) tr(a,i){ cout << *i << endl; }
@@ -27,34 +27,37 @@ inline void geta(T *a){
 	while(p>='0'&&p<='9') { n = (n<< 3) + (n<< 1) + (p - '0'); p=getw(); }
 	*a = n*s;
 }
+lld lcm(int a, int b){
+	return (a*b)/__gcd(a,b);
+}
+
 
 lld solve(){
-	lld ans = 1;
-	string str;
-	cin >> str;
 
-	bool flag = true;
-	tr(str,it){
-		if(flag){
-			if(*it == 'l') ans <<= 1;
-			else ans = (ans << 1) + 2;
-		}else{
-			if( *it == 'l' ) ans = (ans<<1) - 1;
-			else ans = (ans << 1) + 1;
-		}
+	int i,k,l,m,n,j;
+	get(n);
+	
+	get(m);
+	
+	int a[1000000];
 
-		if( ans  >= 1000000007) ans %= 1000000007;
-		flag ^= 1;
-	}	
-	return ans;
+	rep(m,i){
+		get(a[i]);
+	}
+
+	lld lcmo = a[0];
+
+	for(i=1;i<m;i++){
+		lcmo = lcm(lcmo,a[i]);
+	}
+
+	return n/lcmo;
+
 }
 
  int main(){
 	lld i,j,k,l;
-	vi a;
 	lld t;
-
-	// cout << solve();
 	get(t);
 	while(t--){
 		cout << solve() << endl;
