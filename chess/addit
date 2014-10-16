@@ -10,3 +10,9 @@ cd ..
  git commit -m ladder
  git push
 
+#!/bin/bash
+cd ..
+ git add .
+ git commit -m ladder
+ git push
+

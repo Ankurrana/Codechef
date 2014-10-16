@@ -20,3 +20,14 @@ fi
 
 echo  
 
+#!/bin/bash
+g++ chess.cpp -o p 
+if [  "$?" = "0" ] ; then
+	./p < input.txt > output.txt	
+	cat output.txt
+fi
+
+
+
+echo  
+
